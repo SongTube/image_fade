@@ -257,21 +257,21 @@ class _ImageFadeState extends State<ImageFade> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget?> kids = [];
+    List<Widget> kids = [];
     
     Widget? front = _fadeFront, back = _fadeBack;
     if (_resolver != null && _resolver!.inLoad && widget.loadingBuilder != null) {
       front = widget.loadingBuilder!(context, _front!, _resolver!.chunkEvent);
     }
 
-    if (widget.placeholder != null) { kids.add(widget.placeholder); }
+    if (widget.placeholder != null) { kids.add(widget.placeholder!); }
     if (back != null) { kids.add(back); }
     if (front != null) { kids.add(front); }
 
     Widget content = Container(
       width: widget.width,
       height: widget.height,
-      child: Stack(children: kids as List<Widget>, fit: StackFit.passthrough,)
+      child: Stack(children: kids, fit: StackFit.passthrough,)
     );
 
     if (widget.excludeFromSemantics) {
